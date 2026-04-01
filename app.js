@@ -91,11 +91,9 @@ btnVerificar.addEventListener('click', function () {
 
     if (appsDeDano.includes(appDigitado)) {
         vida = vida - 15;
-        rostoPet.innerText = "😭";
         mostrarToast('😩 Procrastinou! -15 de vida.');
     } else if (appsDeCura.includes(appDigitado)) {
         vida = vida + 10;
-        rostoPet.innerText = "🤓";
         mostrarToast('🧠 Focou! +10 de vida.');
     } else {
         mostrarToast('🤔 App neutro. Nenhum efeito.');
@@ -196,3 +194,18 @@ function removerApp(nomeApp, categoria) {
 
     renderizarListas();
 }
+
+const btnAppsCadastrados = document.querySelector('#btn-accordion');
+const appsCadastrados = document.querySelector('#conteudo-accordion');
+
+btnAppsCadastrados.addEventListener('click', function () {
+    appsCadastrados.classList.toggle('aberto');
+    const seta = btnAppsCadastrados.querySelector('.accordion-seta');
+    seta.classList.toggle('aberto');
+
+    if (appsCadastrados.classList.contains('aberto')) {
+        setTimeout(function () {
+            appsCadastrados.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+});

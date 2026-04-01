@@ -47,14 +47,20 @@
             <button id="btn-cadastrar-app">Salvar App</button>
         </div>
 
-        <!-- Seção: Apps cadastrados -->
-        <!-- O JS vai preencher as listas abaixo dinamicamente -->
+        <!-- Seção: Apps cadastrados (accordion) -->
         <div class="secao">
-            <h3>Apps Cadastrados</h3>
-            <p class="lista-titulo">💀 Dano</p>
-            <ul id="lista-dano"></ul>
-            <p class="lista-titulo">✅ Cura</p>
-            <ul id="lista-cura"></ul>
+            <!-- O header vira um botão clicável. O JS vai usar o ID para ouvir o clique -->
+            <button id="btn-accordion" class="accordion-header">
+                <span>Apps Cadastrados</span>
+                <span class="accordion-seta">▾</span>
+            </button>
+            <!-- Este div começa fechado. O JS adiciona a classe 'aberto' para abrir -->
+            <div id="conteudo-accordion" class="accordion-conteudo">
+                <p class="lista-titulo">💀 Dano</p>
+                <ul id="lista-dano"></ul>
+                <p class="lista-titulo">✅ Cura</p>
+                <ul id="lista-cura"></ul>
+            </div>
         </div>
     </div>
 

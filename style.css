@@ -26,6 +26,11 @@
    Remove os estilos padrão "feios" do navegador
    e define a base do nosso design.
    ============================================== */
+/* Garante que o scroll funcione em qualquer conteúdo que ultrapasse a tela */
+html {
+    overflow-y: auto;
+}
+
 * {
     /* box-sizing faz com que o padding não aumente o tamanho os elementos */
     box-sizing: border-box;
@@ -37,13 +42,15 @@ body {
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     font-family: var(--fonte-principal);
-    /* min-height e display:flex + place-items:center 
-       é o truque para centralizar um elemento na página inteira */
     min-height: 100vh;
     display: flex;
-    place-items: center;
+    /* flex-start: alinha o container ao topo em vez de centralizar verticalmente.
+       Assim, quando o conteúdo cresce, ele empurra para baixo e a página rola normalmente. */
+    align-items: flex-start;
     justify-content: center;
-    /* background complexo para dar aquele efeito de "gradiente vivo" */
+    /* padding vertical garante espaço acima e abaixo do container */
+    padding: 2rem 1rem;
+    box-sizing: border-box;
     background-image:
         radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
         radial-gradient(ellipse at 80% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 40%);
@@ -288,4 +295,55 @@ select option {
     color: var(--cor-dano);
     opacity: 1;
     transform: none;
+}
+
+/* ==============================================
+   ACCORDION (seção que abre e fecha)
+   ============================================== */
+.accordion-header {
+    background: none;
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--cor-texto-suave);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.accordion-header:hover {
+    color: var(--cor-texto);
+    opacity: 1;
+    transform: none;
+}
+
+/* A seta gira 180° quando o accordion está aberto */
+.accordion-seta {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+/* Quando o conteúdo tem a classe 'aberto', a seta do irmão anterior gira */
+.accordion-conteudo.aberto~* .accordion-seta,
+.accordion-header:has(+ .accordion-conteudo.aberto) .accordion-seta {
+    transform: rotate(180deg);
+}
+
+/* O conteúdo começa com altura 0 e overflow hidden (invisível) */
+.accordion-conteudo {
+    max-height: 0;
+    overflow: hidden;
+    /* transition anima suavemente a abertura/fechamento */
+    transition: max-height 0.35s ease;
+}
+
+/* Quando a classe 'aberto' é adicionada, o conteúdo expande */
+.accordion-conteudo.aberto {
+    max-height: 1000px;
 }
