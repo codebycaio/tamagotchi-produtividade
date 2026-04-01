@@ -1,26 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tamagotchi da Produtividade</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div id="container-do-pet">
         <h1 id="nome-pet">DevGotchi</h1>
-        <div id="rosto-pet" style="font-size: 50;">😴</div>
 
-        <p>Vida: <span id="barra-vida">100</span>%</p>
+        <!-- Emoji do pet -->
+        <div id="rosto-pet">😴</div>
 
-        <button id="btn-dano">Simular Procrastinação</button>
-        <button id="btn-cura">Simular Foco</button>
+        <!-- Barra de vida visual (o span#barra-vida continua existindo, mas escondido,
+             pois o JavaScript ainda usa ele para guardar o número) -->
+        <div class="vida-container">
+            <div class="vida-barra-interna" id="barra-interna"></div>
+        </div>
+        <p class="vida-texto">Vida: <span id="barra-vida">100</span>%</p>
 
-        <hr> <h3>Qual app você abriu?</h3>
-        <input type="text" id="input-app" placeholder="Ex: TikTok ou VS Code">
-        <button id="btn-verificar">Verificar App</button>
+        <!-- Seção: Simulação rápida -->
+        <div class="secao">
+            <h3>Simulação Rápida</h3>
+            <button id="btn-dano">😩 Simular Procrastinação</button>
+            <button id="btn-cura">🧠 Simular Foco</button>
+        </div>
+
+        <!-- Seção: Verificar app aberto -->
+        <div class="secao">
+            <h3>Qual app você abriu?</h3>
+            <input type="text" id="input-app" placeholder="Ex: TikTok ou VS Code">
+            <button id="btn-verificar">Verificar App</button>
+        </div>
+
+        <!-- Seção: Cadastrar novo app -->
+        <div class="secao">
+            <h3>Cadastrar Novo App</h3>
+            <input type="text" id="input-novo-app" placeholder="Ex: WhatsApp">
+            <select id="select-categoria">
+                <option value="dano">Procrastinação (Dano)</option>
+                <option value="cura">Foco (Cura)</option>
+            </select>
+            <button id="btn-cadastrar-app">Salvar App</button>
+        </div>
     </div>
 
     <script src="app.js"></script>
 </body>
+
 </html>
