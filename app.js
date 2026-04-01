@@ -47,6 +47,18 @@ function atualizarVisual() {
         barraInterna.style.background = 'linear-gradient(90deg, #ef4444, #dc2626)';
     }
 
+    if (vida > 70) {
+        rostoPet.innerText = '🤓'; // saudável e focado
+    } else if (vida > 40) {
+        rostoPet.innerText = '😐'; // ok, mas poderia ser melhor
+    } else if (vida > 20) {
+        rostoPet.innerText = '😟'; // preocupado
+    } else if (vida > 0) {
+        rostoPet.innerText = '😵'; // quase morrendo
+    } else {
+        rostoPet.innerText = '💀'; // morreu
+    }
+
     localStorage.setItem('vidaPet', vida.toString());
 }
 
@@ -56,16 +68,14 @@ atualizarVisual();
 // --- BOTÕES DE SIMULAÇÃO ---
 btnDano.addEventListener('click', function () {
     vida = vida - 10;
-    if (vida < 0) vida = 0;
-    rostoPet.innerText = "😭";
-    atualizarVisual(); // usamos a função em vez de repetir código
+    if (vida < 0) vida = 0;  // só limita o valor mínimo
+    atualizarVisual();        // sempre roda
 });
 
 btnCura.addEventListener('click', function () {
     vida = vida + 5;
-    if (vida > 100) vida = 100;
-    rostoPet.innerText = "🤓";
-    atualizarVisual();
+    if (vida > 100) vida = 100;  // só limita o valor máximo
+    atualizarVisual();            // sempre roda
 });
 
 // --- LISTAS DE APPS ---
