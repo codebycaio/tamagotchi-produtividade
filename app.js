@@ -21,7 +21,7 @@ function mostrarToast(mensagem) {
 
     // setTimeout executa uma função depois de um tempo (em milissegundos).
     // Aqui: depois de 2500ms (2.5 segundos), remove a classe 'visivel' (some).
-    setTimeout(function() {
+    setTimeout(function () {
         toast.classList.remove('visivel');
     }, 2500);
 }
@@ -47,7 +47,7 @@ function atualizarVisual() {
         barraInterna.style.background = 'linear-gradient(90deg, #ef4444, #dc2626)';
     }
 
-    localStorage.setItem('vidaPet', vida.toString())
+    localStorage.setItem('vidaPet', vida.toString());
 }
 
 // Chamamos logo de início para a barra aparecer corretamente ao carregar a página
@@ -141,8 +141,36 @@ btnCadastrarApp.addEventListener('click', function () {
         localStorage.setItem('cura', JSON.stringify(appsDeCura));
 
         inputNovoApp.value = "";
+        renderizarListas();
 
     } else {
         mostrarToast('⚠️ Digite o nome de um app primeiro.');
     }
 });
+
+const listaDano = document.querySelector('#lista-dano');
+const listaCura = document.querySelector('#lista-cura');
+
+function renderizarListas() {
+    // Primeiro limpamos as listas. Se não fizermos isso,
+    // cada vez que a função rodar, os itens vão DUPLICAR na tela.
+    listaDano.innerHTML = '';
+    listaCura.innerHTML = '';
+
+    // forEach percorre cada item do array, um por um.
+    // A cada volta, 'app' recebe o valor do item atual (ex: 'tiktok', depois 'instagram'...).
+    appsDeDano.forEach(function(app) {
+        // innerHTML += significa "adiciona ao final do que já existe dentro do elemento".
+        // Estamos criando uma tag <li> com o nome do app dentro e colocando na lista.
+        // Resultado no HTML: <li>tiktok</li>, <li>instagram</li>, etc.
+        listaDano.innerHTML += '<li>' + app + '</li>';
+    });
+
+    // Mesma lógica para a lista de cura
+    appsDeCura.forEach(function(app) {
+        listaCura.innerHTML += '<li>' + app + '</li>';
+    });
+}
+
+// Chamamos ao carregar a página para já mostrar os apps salvos no localStorage
+renderizarListas();
