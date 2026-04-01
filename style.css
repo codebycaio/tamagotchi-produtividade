@@ -8,9 +8,12 @@
     --cor-fundo: #0d0d1a;
     --cor-container: #1a1a2e;
     --cor-borda: #2a2a4a;
-    --cor-destaque: #7c3aed;    /* roxo - nossa cor principal */
-    --cor-cura: #22c55e;        /* verde - vida e cura */
-    --cor-dano: #ef4444;        /* vermelho - dano e procrastinação */
+    --cor-destaque: #7c3aed;
+    /* roxo - nossa cor principal */
+    --cor-cura: #22c55e;
+    /* verde - vida e cura */
+    --cor-dano: #ef4444;
+    /* vermelho - dano e procrastinação */
     --cor-texto: #e2e8f0;
     --cor-texto-suave: #94a3b8;
     --fonte-principal: 'Segoe UI', system-ui, sans-serif;
@@ -41,7 +44,7 @@ body {
     place-items: center;
     justify-content: center;
     /* background complexo para dar aquele efeito de "gradiente vivo" */
-    background-image: 
+    background-image:
         radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
         radial-gradient(ellipse at 80% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 40%);
 }
@@ -58,8 +61,10 @@ body {
     max-width: 420px;
     box-shadow: var(--sombra);
     display: flex;
-    flex-direction: column; /* empilha os filhos verticalmente */
-    gap: 1rem;              /* espaço entre cada filho */
+    flex-direction: column;
+    /* empilha os filhos verticalmente */
+    gap: 1rem;
+    /* espaço entre cada filho */
 }
 
 /* ==============================================
@@ -80,7 +85,8 @@ body {
    ROSTO DO PET (O emoji)
    ============================================== */
 #rosto-pet {
-    font-size: 5rem !important; /* !important sobrescreve o style="" inline do HTML */
+    font-size: 5rem !important;
+    /* !important sobrescreve o style="" inline do HTML */
     text-align: center;
     /* transition: cria a animação suave quando o emoji muda de tamanho */
     transition: transform 0.3s ease;
@@ -89,7 +95,8 @@ body {
 
 /* :hover é um pseudo-seletor: aplica o estilo quando o mouse está SOBRE o elemento */
 #rosto-pet:hover {
-    transform: scale(1.1); /* escala para 110% do tamanho original */
+    transform: scale(1.1);
+    /* escala para 110% do tamanho original */
 }
 
 /* ==============================================
@@ -97,9 +104,11 @@ body {
    ============================================== */
 .vida-container {
     background-color: var(--cor-borda);
-    border-radius: 999px; /* valor gigante = sempre um oval perfeito */
+    border-radius: 999px;
+    /* valor gigante = sempre um oval perfeito */
     height: 12px;
-    overflow: hidden; /* esconde a barra interna quando ela ultrapassa o container */
+    overflow: hidden;
+    /* esconde a barra interna quando ela ultrapassa o container */
 }
 
 .vida-barra-interna {
@@ -141,9 +150,11 @@ body {
    ============================================== */
 button {
     padding: 0.6rem 1rem;
-    border: none;           /* remove a borda padrão feia do botão */
+    border: none;
+    /* remove a borda padrão feia do botão */
     border-radius: var(--raio-borda);
-    cursor: pointer;        /* transforma o cursor em "mãozinha" ao passar */
+    cursor: pointer;
+    /* transforma o cursor em "mãozinha" ao passar */
     font-size: 0.9rem;
     font-weight: 600;
     /* transition: anima suavemente qualquer mudança de estilo */
@@ -154,11 +165,13 @@ button {
 /* Efeito de "pressionar" o botão */
 button:hover {
     opacity: 0.88;
-    transform: translateY(-2px); /* move 2px para cima */
+    transform: translateY(-2px);
+    /* move 2px para cima */
 }
 
 button:active {
-    transform: translateY(0px); /* volta ao lugar ao clicar */
+    transform: translateY(0px);
+    /* volta ao lugar ao clicar */
 }
 
 #btn-dano {
@@ -171,7 +184,8 @@ button:active {
     color: white;
 }
 
-#btn-verificar, #btn-cadastrar-app {
+#btn-verificar,
+#btn-cadastrar-app {
     background: linear-gradient(135deg, var(--cor-destaque), #9f67ff);
     color: white;
 }
@@ -190,7 +204,8 @@ select {
     font-size: 0.9rem;
     /* transition: a borda vai mudar de cor suavemente ao focar */
     transition: border-color 0.2s ease;
-    outline: none; /* remove o contorno azul padrão do navegador */
+    outline: none;
+    /* remove o contorno azul padrão do navegador */
 }
 
 /* :focus é ativado quando o usuário clica dentro do input */
@@ -201,4 +216,23 @@ select:focus {
 
 select option {
     background-color: var(--cor-container);
+}
+
+#toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cor-destaque);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+#toast.visivel {
+    opacity: 1;
 }

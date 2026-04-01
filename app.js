@@ -7,6 +7,25 @@ const barraVida = document.querySelector('#barra-vida');
 // Selecionamos o novo elemento da barra de progresso visual
 const barraInterna = document.querySelector('#barra-interna');
 
+// --- FUNÇÃO: MOSTRAR TOAST ---
+// Busca o elemento #toast pelo ID, igual a todos os outros elementos
+const toast = document.querySelector('#toast');
+
+function mostrarToast(mensagem) {
+    // Define o texto que vai aparecer dentro do toast
+    toast.innerText = mensagem;
+
+    // classList.add() adiciona uma classe CSS no elemento.
+    // Quando a classe 'visivel' é adicionada, o CSS muda opacity de 0 para 1 (aparece)
+    toast.classList.add('visivel');
+
+    // setTimeout executa uma função depois de um tempo (em milissegundos).
+    // Aqui: depois de 2500ms (2.5 segundos), remove a classe 'visivel' (some).
+    setTimeout(function() {
+        toast.classList.remove('visivel');
+    }, 2500);
+}
+
 // --- FUNÇÃO AUXILIAR (atualizarVisual) ---
 // Em vez de escrever barraVida.innerText e barraInterna.style.width toda hora,
 // criamos UMA função que faz tudo isso de uma vez so.
@@ -63,13 +82,13 @@ btnVerificar.addEventListener('click', function () {
     if (appsDeDano.includes(appDigitado)) {
         vida = vida - 15;
         rostoPet.innerText = "😭";
-        console.log("Procrastinou! Perdeu vida.");
+        mostrarToast('😩 Procrastinou! -15 de vida.');
     } else if (appsDeCura.includes(appDigitado)) {
         vida = vida + 10;
         rostoPet.innerText = "🤓";
-        console.log("Focou! Ganhou vida.");
+        mostrarToast('🧠 Focou! +10 de vida.');
     } else {
-        console.log("App neutro. Nada acontece.");
+        mostrarToast('🤔 App neutro. Nenhum efeito.');
     }
 
     if (vida < 0) vida = 0;
@@ -99,12 +118,11 @@ btnCadastrarApp.addEventListener('click', function () {
     if (novoApp !== "") {
 
         if (categoriaEscolhida === 'dano') {
-            // O .push() "empurra" o novo valor para o final do array
             appsDeDano.push(novoApp);
-            console.log(novoApp + " foi adicionado à lista de Dano!");
+            mostrarToast('💀 "' + novoApp + '" adicionado como Dano!');
         } else if (categoriaEscolhida === 'cura') {
             appsDeCura.push(novoApp);
-            console.log(novoApp + " foi adicionado à lista de Cura!");
+            mostrarToast('✅ "' + novoApp + '" adicionado como Cura!');
         }
 
         localStorage.setItem('dano', JSON.stringify(appsDeDano));
@@ -113,6 +131,6 @@ btnCadastrarApp.addEventListener('click', function () {
         inputNovoApp.value = "";
 
     } else {
-        console.log("Por favor, digite o nome de um aplicativo para cadastrar.");
+        mostrarToast('⚠️ Digite o nome de um app primeiro.');
     }
 });
