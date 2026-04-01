@@ -152,25 +152,37 @@ const listaDano = document.querySelector('#lista-dano');
 const listaCura = document.querySelector('#lista-cura');
 
 function renderizarListas() {
-    // Primeiro limpamos as listas. Se não fizermos isso,
-    // cada vez que a função rodar, os itens vão DUPLICAR na tela.
     listaDano.innerHTML = '';
     listaCura.innerHTML = '';
 
-    // forEach percorre cada item do array, um por um.
-    // A cada volta, 'app' recebe o valor do item atual (ex: 'tiktok', depois 'instagram'...).
-    appsDeDano.forEach(function(app) {
-        // innerHTML += significa "adiciona ao final do que já existe dentro do elemento".
-        // Estamos criando uma tag <li> com o nome do app dentro e colocando na lista.
-        // Resultado no HTML: <li>tiktok</li>, <li>instagram</li>, etc.
-        listaDano.innerHTML += '<li>' + app + '</li>';
+    appsDeDano.forEach(function (app) {
+        // Agora cada <li> tem o nome do app + um botão de remover.
+        // onclick="removerApp(...)" diz: "quando clicar, chame essa função com esses argumentos".
+        // Passamos o nome do app e a categoria para a função saber o que e de onde remover.
+        listaDano.innerHTML += '<li>' + app + ' <button class="btn-remover" onclick="removerApp(\'' + app + '\', \'dano\')">✕</button></li>';
     });
 
-    // Mesma lógica para a lista de cura
-    appsDeCura.forEach(function(app) {
-        listaCura.innerHTML += '<li>' + app + '</li>';
+    appsDeCura.forEach(function (app) {
+        listaCura.innerHTML += '<li>' + app + ' <button class="btn-remover" onclick="removerApp(\'' + app + '\', \'cura\')">✕</button></li>';
     });
 }
 
 // Chamamos ao carregar a página para já mostrar os apps salvos no localStorage
 renderizarListas();
+
+function removerApp(nomeApp, categoria) {
+    if (categoria === 'dano') {
+        const posicao = appsDeDano.indexOf(nomeApp);
+        appsDeDano.splice(posicao, 1);
+    } else {
+        // Mesma lógica: precisava de um indexOf próprio aqui
+        const posicao = appsDeCura.indexOf(nomeApp);
+        appsDeCura.splice(posicao, 1);
+    }
+
+    // Salva os dois arrays atualizados
+    localStorage.setItem('dano', JSON.stringify(appsDeDano));
+    localStorage.setItem('cura', JSON.stringify(appsDeCura));
+
+    renderizarListas();
+}
