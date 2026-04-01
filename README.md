@@ -75,7 +75,7 @@ A ideia é crescer o DevGotchi em fases:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/tamagotchi-produtividade.git
+git clone https://github.com/codebycaio/tamagotchi-produtividade.git
 
 # Abra o arquivo no navegador
 # Sem necessidade de instalar dependências — é HTML/CSS/JS puro!
