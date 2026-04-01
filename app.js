@@ -118,9 +118,21 @@ btnCadastrarApp.addEventListener('click', function () {
     if (novoApp !== "") {
 
         if (categoriaEscolhida === 'dano') {
+            // Antes de adicionar em Dano, verifica se está em Cura e remove de lá.
+            // indexOf retorna a posição do item. Se não existe, retorna -1.
+            const posicaoEmCura = appsDeCura.indexOf(novoApp);
+            if (posicaoEmCura !== -1) {
+                // splice(posição, 1) remove 1 item a partir da posição encontrada.
+                appsDeCura.splice(posicaoEmCura, 1);
+            }
             appsDeDano.push(novoApp);
             mostrarToast('💀 "' + novoApp + '" adicionado como Dano!');
         } else if (categoriaEscolhida === 'cura') {
+            // Mesma lógica: remove de Dano antes de adicionar em Cura.
+            const posicaoEmDano = appsDeDano.indexOf(novoApp);
+            if (posicaoEmDano !== -1) {
+                appsDeDano.splice(posicaoEmDano, 1);
+            }
             appsDeCura.push(novoApp);
             mostrarToast('✅ "' + novoApp + '" adicionado como Cura!');
         }
