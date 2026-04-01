@@ -79,8 +79,12 @@ btnCura.addEventListener('click', function () {
 });
 
 // --- LISTAS DE APPS ---
-const appsDeDano = JSON.parse(localStorage.getItem('dano')) || ['tiktok', 'instagram', 'twitter', 'x', 'netflix'];
-const appsDeCura = JSON.parse(localStorage.getItem('cura')) || ['vs code', 'visual studio code', 'notion', 'figma'];
+// Valores padrão — definidos uma vez, usados em dois lugares
+const DANO_PADRAO = ['tiktok', 'instagram', 'twitter', 'x', 'netflix'];
+const CURA_PADRAO = ['vs code', 'visual studio code', 'notion', 'figma'];
+
+let appsDeDano = JSON.parse(localStorage.getItem('dano')) || [...DANO_PADRAO];
+let appsDeCura = JSON.parse(localStorage.getItem('cura')) || [...CURA_PADRAO];
 
 // --- VERIFICAR APP ABERTO ---
 const inputApp = document.querySelector('#input-app');
@@ -207,5 +211,19 @@ btnAppsCadastrados.addEventListener('click', function () {
         setTimeout(function () {
             appsCadastrados.scrollIntoView({ behavior: 'smooth' });
         }, 100);
+    }
+});
+
+const btnReset = document.querySelector('#btn-reset')
+
+btnReset.addEventListener('click', function () {
+    if (confirm('Tem certeza? Isso vai resetar o pet!')) {
+        vida = 100;
+        localStorage.clear();
+        appsDeDano = [...DANO_PADRAO]
+        appsDeCura = [...CURA_PADRAO]
+
+        atualizarVisual();
+        renderizarListas();
     }
 });
